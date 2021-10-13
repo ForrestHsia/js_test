@@ -1,0 +1,59 @@
+<html>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+<style>
+    #step{
+        background: red;
+    }
+
+    #steps{
+        color: blue;
+        font-size: 200px;
+        background: red;
+    }
+    .active{
+        background-color: green;
+    }
+    </style>
+    <body>
+<button id="start" class="btn start active" >Start</button>
+<button id="reset" class="btn reset active">Reset</button>
+<form class="test form">
+<div>
+輸入密碼：<input placeholder="eventListner測試" type='date' class='test'/>
+</div>
+<div>
+確認密碼：<input placeholder="eventListner測試" type='password' class='test' name="password check" />
+</div>
+<div>
+    Radio Test：
+    <input type="radio" name="gender" id="male"><label for="male">男性</label>
+    <input type="radio" name="gender" id="female"><label for="female">女性</label>
+    <input type="radio" name="gender" id="lgbt"><label for="lgbt">LGBT</label>
+</div>
+</form>
+<h1 id="steps">0</h1>
+<canvas width="400" height="400" id="maze"> </canvas>
+</body>
+<script>
+    const element = document.querySelector('h1')
+    element.addEventListener("click",function(){document.querySelector(".active").classList.toggle("active")})
+    
+    let reset_element = document.querySelector('.reset') // reset btn class
+    reset_element.addEventListener('')
+
+    const inputElement = document.querySelector(".test")
+    inputElement.addEventListener("keydown",function(){})
+    const btnElement = document.querySelector('.reset')
+    btnElement.addEventListener('click',function(){console.log()})
+    </script>
+<hr>
+<script>
+
+    </script>
+<div id="guessGame">
+<p id=></p>
+<p></p>
+<p></p>
+</div>
+</html>

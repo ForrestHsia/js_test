@@ -1,0 +1,46 @@
+<html>
+    <head>  
+        <meta http-equiv='Content-Type' content='text/html' charset='utf-8' />  
+        <link rel="stylesheet" type="text/css" href="calculator.css"/>
+        </head>  
+    <body>
+    <div class="calculator math">
+        <div class="col-md-12">
+            <div class="input_detail disPlayDetail show" id="show">0</div>
+            <div class="input_result disPlayResult show" id="show">0</div>
+        </div>
+        <div class="inputButton">
+            <div class="col-md-4">
+                <button type="button" class="button num_button" data-num="7">7</button>
+                <button type="button" class="button num_button" data-num="8">8</button>
+                <button type="button" class="button num_button" data-num="9">9</button>
+                <button type="button" class="button cal_button" data-cal="+">+</button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="button num_button" data-num="4">4</button>
+                <button type="button" class="button num_button" data-num="5">5</button>
+                <button type="button" class="button num_button" data-num="6">6</button>
+                <button type="button" class="button cal_button" data-cal="-">-</button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="button num_button" data-num="1">1</button>
+                <button type="button" class="button num_button" data-num="2">2</button>
+                <button type="button" class="button num_button" data-num="3">3</button>
+                <button type="button" class="button cal_button" data-cal="*">X</button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="button num_button" data-num="0">0</button>
+                <button type="button" class="button doublezero">00</button>
+                <button type="button" class="button button_function decimal">.</button>
+                <button type="button" class="button cal_button" data-cal="/">÷</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="button button_function ac" data-num="0">AC</button>
+                <button type="button" class="button button_function backspace"><</button>
+                <button type="button" class="button cal_button" id="equalBtn" data-cal="=">=</button>
+            </div>
+        </div>
+    </div>
+        </body>  
+        <script src="calculator.js"></script>
+</html>

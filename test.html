@@ -1,0 +1,26 @@
+<html>  
+    <head>  
+        <meta http-equiv='Content-Type' content='text/html' charset='utf-8' />  
+        </head>  
+    <body>  
+       <form action = '/upload' method='post'>  
+        <textarea name='text' rows='20' cols='20'></textarea>  
+        <input type='submit' value=submitText/>  
+        </form>  
+        <script>
+            function creaatePerson(name){
+                let obj = {};
+                obj.name = name;
+                obj.hello = function(){
+                    document.write("Hi, I'm" + this.name + ".");
+                    console.log("Hi, I'm" + this.name + ".");
+                };
+                return obj;
+            };
+            
+            let forrest = creaatePerson("Forrest");
+            forrest.name;
+            </script>
+
+        </body>  
+</html>
