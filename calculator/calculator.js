@@ -1,8 +1,10 @@
+let showDigital = 10;
 let doubleZero = document.querySelector('.doublezero');
 let decimal = document.querySelector('.decimal');
 let disPlayDetail = document.querySelector('.disPlayDetail');
 let disPlayResult = document.querySelector('.disPlayResult');
 let ac = document.querySelector('.ac');
+let percent = document.querySelector('.percent');
 let backspace = document.querySelector('.backspace');
 let num_button = document.querySelectorAll('.num_button');
 let cal_button = document.querySelectorAll('.cal_button');
@@ -13,12 +15,11 @@ let displayVal = "0";
 let btnText;
 
 
-let updateDisplayVal = (e) => {
+let updateDisplayVal = (e) => { // 數字輸入功能
     btnText = e.target.dataset.num;
     if(displayVal === '0' || displayVal === 0)
         displayVal = '';
-    
-     //console.log("display-1:" + displayVal)  //檢查用
+
     displayVal += btnText;
     disPlayResult.innerText = displayVal;
     disPlayDetail.innerText = displayVal;
@@ -28,7 +29,7 @@ for(let i=0; i<num_button.length; i++){
     num_button[i].addEventListener('click',updateDisplayVal,false);
 }
 
-let performOperation = (e) => {
+let performOperation = (e) => { // "加減乘除"以及"等於"計算功能
     let operator = e.target.dataset.cal;
     let operator_Text = e.target.innerText;
     if (displayVal !== undefined && operator !== '=') {
@@ -40,24 +41,19 @@ let performOperation = (e) => {
         evalStrAry.push(operator_Text);
         evalStrAry_math.push(pendingVal);  //計算用
         evalStrAry_math.push(operator);
-         //console.log("evalStrAry not yet =:" + typeof evalStrAry + "，inner is：" + evalStrAry)  // 檢查用
-         //console.log("evalStrAry_math not yet =:" + typeof evalStrAry_math + "，inner is：" + evalStrAry_math)  // 檢查用
+
         let evaluation = evalStrAry.join(' ');
-        //let evaluation_list = evalStrAry.join(' ');
         disPlayDetail.innerText = evaluation;
-         //console.log("evaluation_list not yet =:" + typeof evaluation_list + "，inner is：" + evaluation_list)   
     } else {
-        
         evalStrAry_math.push(displayVal);
         evalStrAry.push(displayVal);
 
         let evaluation = evalStrAry_math.join('');
         let evaluation_list = evalStrAry.join(' '); // 顯示用
 
-        evalStrAry_math = eval(evaluation);
-
-        disPlayResult.innerText = evalStrAry_math.toFixed(6); // 計算用
-        console.log(evalStrAry_math.length)
+        evalStrAry_math = makeDigital(eval(evaluation));
+        
+        disPlayResult.innerText = evalStrAry_math; // 計算用
         disPlayDetail.innerText = evaluation_list; // 顯示用
 
         displayVal = "0";
@@ -70,7 +66,7 @@ for(let i=0; i<cal_button.length; i++){
     cal_button[i].addEventListener('click',performOperation,false);
 }
 
-ac.addEventListener('click',function(){
+ac.addEventListener('click',function(){ //歸零功能
     displayVal = "0";
     pendingVal = undefined;
     evalStrAry = [];
@@ -79,7 +75,19 @@ ac.addEventListener('click',function(){
     disPlayResult.innerText = displayVal;
 },false)
 
-backspace.addEventListener("click",function(){
+percent.addEventListener('click',function(){  //瑋俊新增取percent功能
+    let percent_buff = Number(disPlayResult.innerText)/100
+    disPlayResult.innerText = percent_buff;
+
+    evalStrAry.push(percent_buff);
+    evalStrAry_math.push(percent_buff);
+
+    let evaluation = evalStrAry.join(' ');
+    disPlayDetail.innerText = evaluation;
+
+});
+
+backspace.addEventListener("click",function(){ //退位功能
         let displayVal_length = displayVal.length;
         displayVal = displayVal.slice(0, displayVal_length - 1);
         if (displayVal === ''){
@@ -89,7 +97,7 @@ backspace.addEventListener("click",function(){
         disPlayDetail.innerText = displayVal;
     },false);
 
-decimal.addEventListener('click', function(){
+decimal.addEventListener('click', function(){ //小數點功能
     if(!displayVal.includes('.')){
         displayVal += '.';
     }
@@ -97,10 +105,31 @@ decimal.addEventListener('click', function(){
     disPlayDetail.innerText = displayVal;
 },false);
 
-doubleZero.addEventListener('click',function(){
+doubleZero.addEventListener('click',function(){ //鍵入00功能
     if(displayVal !== '0'){
         displayVal += '00';
     }
     disPlayResult.innerText = displayVal;
     disPlayDetail.innerText = displayVal;
 },false)
+
+
+let makeDigital = (number) =>{ // 瑋俊新增調整顯示位數
+
+    if(Math.abs(number)<Math.pow(10,7) && Math.abs(number)>Math.pow(10,-5)){
+        return number
+    }else{
+        number = number.toExponential(5);
+        let arr = number.split("e");//從計算結果取arr後，分別把element加工製作顯示結果
+
+        arr[1] = "e"+arr[1];
+        arr[0] = Number(arr[0]);
+        
+        if(arr[0].length < showDigital-arr[1].length){
+            arr[0] = arr[0].toFixed(arr[0].length);
+        }else{
+            arr[0] = arr[0].toFixed(showDigital-arr[1].length);
+        }
+        return arr.join("");
+    }
+}

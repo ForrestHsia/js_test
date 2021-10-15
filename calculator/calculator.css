@@ -55,7 +55,7 @@ body{
 
 .input_result {
     width: 310px;
-    font-size: 56px;
+    font-size: 40px;
     height: 70px;
     text-align: right;
     overflow: hidden;
@@ -115,13 +115,13 @@ body{
 
 #equalBtn {
     margin:6px 0;
-    width: 180px;
+    width: 72px;
     height: 64px;
     font-size: 28px;
     border-radius: 16px;
     border:0;
     color:#fff;
-    padding-left: 90px;
+    /* padding-left: 90px; */
     background:linear-gradient(to right, #00C4FF, #6C00FF);
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
