@@ -117,9 +117,25 @@ doubleZero.addEventListener('click',function(){ //鍵入00功能
 let makeDigital = (number) =>{ // 瑋俊新增調整顯示位數
 
     if(Math.abs(number)<Math.pow(10,7) && Math.abs(number)>Math.pow(10,-5)){
-        return number
+        let buff = number.toString().includes('.')
+        switch (buff){
+            case false:
+                return number;
+                break;
+
+            case true:
+                let arr = number.toString().split('.')
+                let buff2 = arr[1].length
+                if (buff2 > showDigital-arr[0].length){
+                    return number = number.toFixed(showDigital-arr[0].length)
+                }else{
+                    return number = number.toFixed(buff2)
+                }
+                break;
+        }
+
     }else{
-        number = number.toExponential(5);
+        number = number.toExponential();
         let arr = number.split("e");//從計算結果取arr後，分別把element加工製作顯示結果
 
         arr[1] = "e"+arr[1];
