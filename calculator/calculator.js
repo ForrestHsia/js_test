@@ -14,19 +14,26 @@ let evalStrAry_math = [];
 let displayVal = "0";
 let btnText;
 
+// 數字輸入功能
 
-let updateDisplayVal = (e) => { // 數字輸入功能
+for(let i=0; i<num_button.length; i++){
+    num_button[i].addEventListener('click',updateDisplayVal,false);
+}
+
+let updateDisplayVal = (e) => { 
     btnText = e.target.dataset.num;
     if(displayVal === '0' || displayVal === 0)
         displayVal = '';
 
     displayVal += btnText;
+    
     disPlayResult.innerText = displayVal;
     disPlayDetail.innerText = displayVal;
 }
 
-for(let i=0; i<num_button.length; i++){
-    num_button[i].addEventListener('click',updateDisplayVal,false);
+// 運算符輸入功能
+for(let i=0; i<cal_button.length; i++){
+    cal_button[i].addEventListener('click',performOperation,false);
 }
 
 let performOperation = (e) => { // "加減乘除"以及"等於"計算功能
@@ -37,21 +44,22 @@ let performOperation = (e) => { // "加減乘除"以及"等於"計算功能
         disPlayDetail.innerText = displayVal;
         displayVal = "0";
 
-        evalStrAry.push(pendingVal); // 顯示用
+        evalStrAry.push(pendingVal);    // 顯示用
         evalStrAry.push(operator_Text);
-        evalStrAry_math.push(pendingVal);  //計算用
+        evalStrAry_math.push(pendingVal);    //計算用
         evalStrAry_math.push(operator);
 
         let evaluation = evalStrAry.join(' ');
         disPlayDetail.innerText = evaluation;
     } else {
+        
         evalStrAry_math.push(displayVal);
         evalStrAry.push(displayVal);
-
+       
         let evaluation = evalStrAry_math.join('');
         let evaluation_list = evalStrAry.join(' '); // 顯示用
-
-        evalStrAry_math = makeDigital(eval(evaluation));
+        
+        evalStrAry_math = makeDigital(new_eval(evaluation));
         
         disPlayResult.innerText = evalStrAry_math; // 計算用
         disPlayDetail.innerText = evaluation_list; // 顯示用
@@ -60,10 +68,6 @@ let performOperation = (e) => { // "加減乘除"以及"等於"計算功能
         evalStrAry = [];
         evalStrAry_math = []; 
     }
-}
-
-for(let i=0; i<cal_button.length; i++){
-    cal_button[i].addEventListener('click',performOperation,false);
 }
 
 ac.addEventListener('click',function(){ //歸零功能
@@ -76,15 +80,12 @@ ac.addEventListener('click',function(){ //歸零功能
 },false)
 
 percent.addEventListener('click',function(){  //瑋俊新增取percent功能
-    let percent_buff = Number(disPlayResult.innerText)/100
-    disPlayResult.innerText = percent_buff;
+    let percent_buff = Number(displayVal)/100
+    displayVal = ""
+    displayVal = percent_buff
 
-    evalStrAry.push(percent_buff);
-    evalStrAry_math.push(percent_buff);
-
-    let evaluation = evalStrAry.join(' ');
-    disPlayDetail.innerText = evaluation;
-
+    disPlayDetail.innerText = displayVal
+    disPlayResult.innerText = displayVal;
 });
 
 backspace.addEventListener("click",function(){ //退位功能
