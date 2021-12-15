@@ -16,10 +16,6 @@ let btnText;
 
 // 數字輸入功能
 
-for(let i=0; i<num_button.length; i++){
-    num_button[i].addEventListener('click',updateDisplayVal,false);
-}
-
 let updateDisplayVal = (e) => { 
     btnText = e.target.dataset.num;
     if(displayVal === '0' || displayVal === 0)
@@ -31,10 +27,11 @@ let updateDisplayVal = (e) => {
     disPlayDetail.innerText = displayVal;
 }
 
-// 運算符輸入功能
-for(let i=0; i<cal_button.length; i++){
-    cal_button[i].addEventListener('click',performOperation,false);
+for(let i=0; i<num_button.length; i++){
+    num_button[i].addEventListener('click',updateDisplayVal,false);
 }
+
+// 運算符輸入功能
 
 let performOperation = (e) => { // "加減乘除"以及"等於"計算功能
     let operator = e.target.dataset.cal;
@@ -59,7 +56,7 @@ let performOperation = (e) => { // "加減乘除"以及"等於"計算功能
         let evaluation = evalStrAry_math.join('');
         let evaluation_list = evalStrAry.join(' '); // 顯示用
         
-        evalStrAry_math = makeDigital(new_eval(evaluation));
+        evalStrAry_math = makeDigital(new_eval(inspections(evaluation)));
         
         disPlayResult.innerText = evalStrAry_math; // 計算用
         disPlayDetail.innerText = evaluation_list; // 顯示用
@@ -68,6 +65,10 @@ let performOperation = (e) => { // "加減乘除"以及"等於"計算功能
         evalStrAry = [];
         evalStrAry_math = []; 
     }
+}
+
+for(let i=0; i<cal_button.length; i++){
+    cal_button[i].addEventListener('click',performOperation,false);
 }
 
 ac.addEventListener('click',function(){ //歸零功能
