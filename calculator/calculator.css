@@ -10,7 +10,22 @@ body{
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
     user-select: none;          /* Likely future */      
-}
+}            </div>
+            <div class="col-md-4">
+                <button type="button" class="button num_button" data-num="1">1</button>
+                <button type="button" class="button num_button" data-num="2">2</button>
+                <button type="button" class="button num_button" data-num="3">3</button>
+                <but            </div>
+            <div class="col-md-4">
+                <button type="button" class="button num_button" data-num="1">1</button>
+                <button type="button" class="button num_button" data-num="2">2</button>
+                <button type="button" class="button num_button" data-num="3">3</button>
+                <but            </div>
+            <div class="col-md-4">
+                <button type="button" class="button num_button" data-num="1">1</button>
+                <button type="button" class="button num_button" data-num="2">2</button>
+                <button type="button" class="button num_button" data-num="3">3</button>
+                <but
 
 .calculator {
     width: 500px;
